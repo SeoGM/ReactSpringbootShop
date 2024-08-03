@@ -5,7 +5,7 @@ const Message = () => {
   const [message, setMessage] = useState<string>('');
 
   useEffect(() => {
-    api.get('/Message')
+    api.get('/message')
       .then(response => {
         setMessage(response.data);
       })
