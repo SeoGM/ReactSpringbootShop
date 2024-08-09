@@ -4,4 +4,8 @@ const api = axios.create({
   baseURL: 'https://reactspringbootshop-backend.run.goorm.io/api',
 });
 
-export default api;
+const userApi = axios.create({
+  baseURL: 'https://reactspringbootshop-backend.run.goorm.io/api/users',
+});
+
+export { api, userApi };

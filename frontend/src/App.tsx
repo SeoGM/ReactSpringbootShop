@@ -1,13 +1,13 @@
 import React from 'react';
-import Message from './components/Message';
+import UserList from './components/users/UserList';
 
 const App = () => {
   return (
     <div className="App">
       <header className="App-header">
         <h1>React Spring Boot App</h1>
-        <Message />
       </header>
+	  <UserList />
     </div>
   );
 };
