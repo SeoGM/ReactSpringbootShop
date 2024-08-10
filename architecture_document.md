@@ -13,7 +13,6 @@
 
 # 2. 폴더 구조 및 설명
 
-\`\`\`plaintext
 shop/
 ├── backend/
 │    ├── src/
@@ -87,7 +86,6 @@ shop/
 │    ├── public/
 │    ├── tests/
 │    └── package.json
-\`\`\`
 
 
 
