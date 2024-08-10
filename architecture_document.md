@@ -12,7 +12,7 @@
 
 
 # 2. 폴더 구조 및 설명
-
+```
 shop/
 ├── backend/
 │    ├── src/
@@ -86,7 +86,7 @@ shop/
 │    ├── public/
 │    ├── tests/
 │    └── package.json
-
+```
 
 
 # 3. 백엔드 구조 설명 (com.shop.backend)
