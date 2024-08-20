@@ -4,6 +4,8 @@ import ShopLayout from './components/ShopLayout';
 import AdminLayout from './components/AdminLayout';
 import MainPage from './features/main/pages/MainPage';
 import LoginPage from './features/user/pages/LoginPage';
+import RegisterPage from './features/user/pages/RegisterPage';
+
 import Dashboard from './features/admin/pages/Dashboard';
 
 const AppRoutes = () => {
@@ -13,6 +15,7 @@ const AppRoutes = () => {
         {/* Shop Routes */}
         <Route path="/" element={<ShopLayout><MainPage /></ShopLayout>} />
         <Route path="/login" element={<ShopLayout><LoginPage /></ShopLayout>} />
+	    <Route path="/register" element={<ShopLayout><RegisterPage /></ShopLayout>} />
         <Route path="/products" element={<ShopLayout><div>Products Page</div></ShopLayout>} />
 
         {/* Admin Routes */}
