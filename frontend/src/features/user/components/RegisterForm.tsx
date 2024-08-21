@@ -1,30 +1,29 @@
-import React, { useState } from 'react';
+import React from 'react';
 import Input from '../../../components/Input';
+import useForm from '../../../utils/useForm';
 
 const RegisterForm = () => {
-  const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [confirmPassword, setConfirmPassword] = useState('');
+  const { values, handleChange } = useForm({
+    name: '',
+    email: '',
+    password: '',
+    confirmPassword: ''
+  });
 
   const handleRegister = (e: React.FormEvent) => {
     e.preventDefault();
 
-    if (password !== confirmPassword) {
+    if (values.password !== values.confirmPassword) {
       alert('Passwords do not match');
       return;
     }
 
     // 회원가입 로직 추가 (예: API 호출)
-    console.log('Name:', name);
-    console.log('Email:', email);
-    console.log('Password:', password);
+    console.log('Name:', values.name);
+    console.log('Email:', values.email);
+    console.log('Password:', values.password);
 
-    // 초기화
-    setName('');
-    setEmail('');
-    setPassword('');
-    setConfirmPassword('');
+    // 초기화는 필요 시 handleChange에서 초기화 가능
   };
 
   return (
@@ -32,29 +31,33 @@ const RegisterForm = () => {
       <Input 
         label="Name" 
         type="text" 
-        value={name} 
-        onChange={(e: React.ChangeEvent<HTMLInputElement>) => setName(e.target.value)} 
+        name="name"
+        value={values.name} 
+        onChange={handleChange} 
         placeholder="Enter your name"
       />
       <Input 
         label="Email" 
         type="email" 
-        value={email} 
-        onChange={(e: React.ChangeEvent<HTMLInputElement>) => setEmail(e.target.value)} 
+        name="email"
+        value={values.email} 
+        onChange={handleChange} 
         placeholder="Enter your email"
       />
       <Input 
         label="Password" 
         type="password" 
-        value={password} 
-        onChange={(e: React.ChangeEvent<HTMLInputElement>) => setPassword(e.target.value)} 
+        name="password"
+        value={values.password} 
+        onChange={handleChange} 
         placeholder="Enter your password"
       />
       <Input 
         label="Confirm Password" 
         type="password" 
-        value={confirmPassword} 
-        onChange={(e: React.ChangeEvent<HTMLInputElement>) => setConfirmPassword(e.target.value)} 
+        name="confirmPassword"
+        value={values.confirmPassword} 
+        onChange={handleChange} 
         placeholder="Confirm your password"
       />
       <button type="submit" style={buttonStyle}>Register</button>
