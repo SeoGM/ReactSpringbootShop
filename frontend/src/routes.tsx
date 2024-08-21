@@ -1,7 +1,7 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import ShopLayout from './components/ShopLayout';
-import AdminLayout from './components/AdminLayout';
+import ShopLayout from './layout/ShopLayout';
+import AdminLayout from './layout/AdminLayout';
 import MainPage from './features/main/pages/MainPage';
 import LoginPage from './features/user/pages/LoginPage';
 import RegisterPage from './features/user/pages/RegisterPage';
