@@ -1,6 +1,8 @@
 import React, { useState, CSSProperties } from 'react';
 import { Link } from 'react-router-dom';
 
+import SearchBar from '../components/SearchBar';
+
 const Header = () => {
   const [showBanner, setShowBanner] = useState(true);
 
@@ -18,6 +20,7 @@ const Header = () => {
 
       <header style={headerStyle}>
         <Link to="/" style={logoStyle}>MyShop</Link>
+	    <SearchBar />
         <nav>
           <ul style={navListStyle}>
             <li style={navItemStyle}><Link to="/">Home</Link></li>
