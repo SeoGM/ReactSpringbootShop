@@ -1,10 +1,10 @@
 tasks:
   - name: React & TypeScript
     init: |
-      cd shop/frontend
+      cd frontend
       npm install
     command: |
-      cd shop/frontend
+      cd frontend
       npm start
 ports:
   - port: 3000
