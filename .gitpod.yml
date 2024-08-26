@@ -1,0 +1,12 @@
+tasks:
+  - name: React & TypeScript
+    init: |
+      cd shop/frontend
+      npm install
+    command: |
+      cd shop/frontend
+      npm start
+ports:
+  - port: 3000
+    onOpen: open-browser
+    visibility: public
