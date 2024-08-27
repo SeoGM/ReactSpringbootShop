@@ -12,20 +12,35 @@ const Header = () => {
         <div style={bannerStyle}>
           <p style={{ margin: 0 }}>
             Special Sale! Get 50% off on all products!
-            <Link to="/sale" style={bannerLinkStyle}>Shop Now</Link>
-            <button style={bannerCloseButtonStyle} onClick={() => setShowBanner(false)}>X</button>
+            <Link to="/sale" style={bannerLinkStyle}>
+              Shop Now
+            </Link>
+            <button
+              style={bannerCloseButtonStyle}
+              onClick={() => setShowBanner(false)}
+            >
+              X
+            </button>
           </p>
         </div>
       )}
 
       <header style={headerStyle}>
-        <Link to="/" style={logoStyle}>MyShop</Link>
-	    <SearchBar />
+        <Link to="/" style={logoStyle}>
+          MyShop
+        </Link>
+        <SearchBar />
         <nav>
           <ul style={navListStyle}>
-            <li style={navItemStyle}><Link to="/">Home</Link></li>
-            <li style={navItemStyle}><Link to="/login">Login</Link></li>
-            <li style={navItemStyle}><Link to="/products">Products</Link></li>
+            <li style={navItemStyle}>
+              <Link to="/">Home</Link>
+            </li>
+            <li style={navItemStyle}>
+              <Link to="/login">Login</Link>
+            </li>
+            <li style={navItemStyle}>
+              <Link to="/products">Products</Link>
+            </li>
           </ul>
         </nav>
       </header>

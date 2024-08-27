@@ -20,7 +20,9 @@ const SearchBar: React.FC = () => {
         placeholder="Search..."
         style={inputStyle}
       />
-      <button type="submit" style={buttonStyle}>Search</button>
+      <button type="submit" style={buttonStyle}>
+        Search
+      </button>
     </form>
   );
 };

@@ -5,18 +5,24 @@ const AdminLayout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   return (
     <div>
       <header style={headerStyle}>
-        <Link to="/admin" style={logoStyle}>Admin Dashboard</Link>
+        <Link to="/admin" style={logoStyle}>
+          Admin Dashboard
+        </Link>
         <nav>
           <ul style={navListStyle}>
-            <li style={navItemStyle}><Link to="/admin">Dashboard</Link></li>
-            <li style={navItemStyle}><Link to="/admin/users">Users</Link></li>
-            <li style={navItemStyle}><Link to="/admin/products">Products</Link></li>
+            <li style={navItemStyle}>
+              <Link to="/admin">Dashboard</Link>
+            </li>
+            <li style={navItemStyle}>
+              <Link to="/admin/users">Users</Link>
+            </li>
+            <li style={navItemStyle}>
+              <Link to="/admin/products">Products</Link>
+            </li>
           </ul>
         </nav>
       </header>
-      <main style={{ padding: '20px' }}>
-        {children}
-      </main>
+      <main style={{ padding: '20px' }}>{children}</main>
     </div>
   );
 };
