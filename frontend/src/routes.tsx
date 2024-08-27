@@ -15,7 +15,7 @@ const AppRoutes = () => {
         {/* Shop Routes */}
         <Route path="/" element={<ShopLayout><MainPage /></ShopLayout>} />
         <Route path="/login" element={<ShopLayout><LoginPage /></ShopLayout>} />
-	      <Route path="/register" element={<ShopLayout><RegisterPage /></ShopLayout>} />
+	<Route path="/register" element={<ShopLayout><RegisterPage /></ShopLayout>} />
         <Route path="/products" element={<ShopLayout><div>Products Page</div></ShopLayout>} />
 
         {/* Admin Routes */}
