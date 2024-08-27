@@ -2,7 +2,7 @@ tasks:
   - name: React & TypeScript
     init: |
       cd frontend
-      npm install
+      npm install --legacy-peer-deps
     command: |
       cd frontend
       npm start
