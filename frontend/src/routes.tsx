@@ -13,64 +13,15 @@ const AppRoutes = () => {
     <Router>
       <Routes>
         {/* Shop Routes */}
-        <Route
-          path="/"
-          element={
-            <ShopLayout>
-              <MainPage />
-            </ShopLayout>
-          }
-        />
-        <Route
-          path="/login"
-          element={
-            <ShopLayout>
-              <LoginPage />
-            </ShopLayout>
-          }
-        />
-        <Route
-          path="/register"
-          element={
-            <ShopLayout>
-              <RegisterPage />
-            </ShopLayout>
-          }
-        />
-        <Route
-          path="/products"
-          element={
-            <ShopLayout>
-              <div>Products Page</div>
-            </ShopLayout>
-          }
-        />
+        <Route path="/" element={<ShopLayout><MainPage /></ShopLayout>} />
+        <Route path="/login" element={<ShopLayout><LoginPage /></ShopLayout>} />
+	      <Route path="/register" element={<ShopLayout><RegisterPage /></ShopLayout>} />
+        <Route path="/products" element={<ShopLayout><div>Products Page</div></ShopLayout>} />
 
         {/* Admin Routes */}
-        <Route
-          path="/admin"
-          element={
-            <AdminLayout>
-              <Dashboard />
-            </AdminLayout>
-          }
-        />
-        <Route
-          path="/admin/users"
-          element={
-            <AdminLayout>
-              <div>Users Management</div>
-            </AdminLayout>
-          }
-        />
-        <Route
-          path="/admin/products"
-          element={
-            <AdminLayout>
-              <div>Products Management</div>
-            </AdminLayout>
-          }
-        />
+        <Route path="/admin" element={<AdminLayout><Dashboard /></AdminLayout>} />
+        <Route path="/admin/users" element={<AdminLayout><div>Users Management</div></AdminLayout>} />
+        <Route path="/admin/products" element={<AdminLayout><div>Products Management</div></AdminLayout>} />
       </Routes>
     </Router>
   );
