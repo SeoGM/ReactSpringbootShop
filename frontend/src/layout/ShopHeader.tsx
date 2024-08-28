@@ -1,5 +1,6 @@
-import React, { useState, CSSProperties } from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import styled from 'styled-components';
 
 import SearchBar from '../components/SearchBar';
 
@@ -9,96 +10,90 @@ const Header = () => {
   return (
     <div>
       {showBanner && (
-        <div style={bannerStyle}>
-          <p style={{ margin: 0 }}>
+        <Banner>
+          <p>
             Special Sale! Get 50% off on all products!
-            <Link to="/sale" style={bannerLinkStyle}>
-              Shop Now
-            </Link>
-            <button
-              style={bannerCloseButtonStyle}
-              onClick={() => setShowBanner(false)}
-            >
+            <BannerLink to="/sale">Shop Now</BannerLink>
+            <BannerCloseButton onClick={() => setShowBanner(false)}>
               X
-            </button>
+            </BannerCloseButton>
           </p>
-        </div>
+        </Banner>
       )}
 
-      <header style={headerStyle}>
-        <Link to="/" style={logoStyle}>
-          MyShop
-        </Link>
+      <StyledHeader>
+        <Logo to="/">MyShop</Logo>
         <SearchBar />
-        <nav>
-          <ul style={navListStyle}>
-            <li style={navItemStyle}>
+        <Nav>
+          <NavList>
+            <NavItem>
               <Link to="/">Home</Link>
-            </li>
-            <li style={navItemStyle}>
+            </NavItem>
+            <NavItem>
               <Link to="/login">Login</Link>
-            </li>
-            <li style={navItemStyle}>
+            </NavItem>
+            <NavItem>
               <Link to="/products">Products</Link>
-            </li>
-          </ul>
-        </nav>
-      </header>
+            </NavItem>
+          </NavList>
+        </Nav>
+      </StyledHeader>
     </div>
   );
 };
 
-// 스타일 객체에 CSSProperties 타입을 명시적으로 지정
-const bannerStyle: CSSProperties = {
-  backgroundColor: '#ffcc00',
-  color: '#333',
-  textAlign: 'center',
-  padding: '10px 0',
-  fontSize: '14px',
-  position: 'relative',
-};
+// styled-components로 스타일 정의
+const Banner = styled.div`
+  background-color: #ffcc00;
+  color: #333;
+  text-align: center;
+  padding: 10px 0;
+  font-size: 14px;
+  position: relative;
+`;
 
-const bannerLinkStyle: CSSProperties = {
-  color: '#333',
-  textDecoration: 'underline',
-  fontWeight: 'bold',
-};
+const BannerLink = styled(Link)`
+  color: #333;
+  text-decoration: underline;
+  font-weight: bold;
+`;
 
-// 여기서 'position' 속성을 명확히 정의
-const bannerCloseButtonStyle: CSSProperties = {
-  position: 'absolute', // 'absolute'는 명확히 CSSPosition 타입의 값임을 알림
-  right: '10px',
-  top: '50%',
-  transform: 'translateY(-50%)',
-  backgroundColor: 'transparent',
-  border: 'none',
-  cursor: 'pointer',
-  fontSize: '16px',
-  color: '#333',
-};
+const BannerCloseButton = styled.button`
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+  color: #333;
+`;
 
-const headerStyle: CSSProperties = {
-  display: 'flex',
-  justifyContent: 'space-between',
-  alignItems: 'center',
-  padding: '10px 20px',
-  backgroundColor: '#333',
-  color: '#fff',
-};
+const StyledHeader = styled.header`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+  background-color: #333;
+  color: #fff;
+`;
 
-const logoStyle: CSSProperties = {
-  fontSize: '1.5rem',
-  color: '#fff',
-  textDecoration: 'none',
-};
+const Logo = styled(Link)`
+  font-size: 1.5rem;
+  color: #fff;
+  text-decoration: none;
+`;
 
-const navListStyle: CSSProperties = {
-  display: 'flex',
-  listStyleType: 'none',
-};
+const Nav = styled.nav``;
 
-const navItemStyle: CSSProperties = {
-  marginLeft: '20px',
-};
+const NavList = styled.ul`
+  display: flex;
+  list-style-type: none;
+`;
+
+const NavItem = styled.li`
+  margin-left: 20px;
+`;
 
 export default Header;

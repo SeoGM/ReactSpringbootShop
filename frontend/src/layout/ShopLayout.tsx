@@ -1,11 +1,16 @@
-import React from 'react';
+import React, { ReactNode } from 'react';
 import Header from './ShopHeader';
+import styled from 'styled-components';
 
-const ShopLayout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+const MainContent = styled.main`
+  padding: 20px;
+`;
+
+const ShopLayout = ({ children }: { children: ReactNode }) => {
   return (
     <div>
       <Header />
-      <main style={{ padding: '20px' }}>{children}</main>
+      <MainContent>{children}</MainContent>
     </div>
   );
 };

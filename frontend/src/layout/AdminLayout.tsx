@@ -1,54 +1,57 @@
-import React from 'react';
+import React, { ReactNode } from 'react';
 import { Link } from 'react-router-dom';
+import styled from 'styled-components';
 
-const AdminLayout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+const AdminLayout = ({ children }: { children: ReactNode }) => {
   return (
     <div>
-      <header style={headerStyle}>
-        <Link to="/admin" style={logoStyle}>
-          Admin Dashboard
-        </Link>
+      <Header>
+        <Logo to="/admin">Admin Dashboard</Logo>
         <nav>
-          <ul style={navListStyle}>
-            <li style={navItemStyle}>
+          <NavList>
+            <NavItem>
               <Link to="/admin">Dashboard</Link>
-            </li>
-            <li style={navItemStyle}>
+            </NavItem>
+            <NavItem>
               <Link to="/admin/users">Users</Link>
-            </li>
-            <li style={navItemStyle}>
+            </NavItem>
+            <NavItem>
               <Link to="/admin/products">Products</Link>
-            </li>
-          </ul>
+            </NavItem>
+          </NavList>
         </nav>
-      </header>
-      <main style={{ padding: '20px' }}>{children}</main>
+      </Header>
+      <Main>{children}</Main>
     </div>
   );
 };
 
-const headerStyle = {
-  display: 'flex',
-  justifyContent: 'space-between',
-  alignItems: 'center',
-  padding: '10px 20px',
-  backgroundColor: '#555',
-  color: '#fff',
-};
+const Header = styled.header`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+  background-color: #555;
+  color: #fff;
+`;
 
-const logoStyle = {
-  fontSize: '1.5rem',
-  color: '#fff',
-  textDecoration: 'none',
-};
+const Logo = styled(Link)`
+  font-size: 1.5rem;
+  color: #fff;
+  text-decoration: none;
+`;
 
-const navListStyle = {
-  display: 'flex',
-  listStyleType: 'none',
-};
+const NavList = styled.ul`
+  display: flex;
+  list-style-type: none;
+`;
 
-const navItemStyle = {
-  marginLeft: '20px',
-};
+const NavItem = styled.li`
+  margin-left: 20px;
+`;
+
+const Main = styled.main`
+  padding: 20px;
+`;
 
 export default AdminLayout;
