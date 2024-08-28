@@ -1,17 +1,18 @@
 import React from 'react';
+import styled from 'styled-components';
+
+const BannerContainer = styled.div`
+  padding: 20px;
+  background-color: #f5f5f5;
+  text-align: center;
+`;
 
 const MainBanner = () => {
   return (
-    <div
-      style={{
-        padding: '20px',
-        backgroundColor: '#f5f5f5',
-        textAlign: 'center',
-      }}
-    >
+    <BannerContainer>
       <h1>Welcome to Our Shop!</h1>
       <p>Discover amazing products and deals!</p>
-    </div>
+    </BannerContainer>
   );
 };
 
