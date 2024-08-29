@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import styled from 'styled-components';
 
 const LoginForm = () => {
   const [username, setUsername] = useState('');
@@ -11,41 +12,51 @@ const LoginForm = () => {
   };
 
   return (
-    <div style={{ padding: '20px', maxWidth: '400px', margin: '0 auto' }}>
+    <FormContainer>
       <h2>Login</h2>
-      <div style={{ marginBottom: '10px' }}>
-        <input
+      <InputWrapper>
+        <StyledInput
           type="text"
           placeholder="Username"
           value={username}
           onChange={(e) => setUsername(e.target.value)}
-          style={{ width: '100%', padding: '8px' }}
         />
-      </div>
-      <div style={{ marginBottom: '20px' }}>
-        <input
+      </InputWrapper>
+      <InputWrapper>
+        <StyledInput
           type="password"
           placeholder="Password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
-          style={{ width: '100%', padding: '8px' }}
         />
-      </div>
-      <button
-        onClick={handleLogin}
-        style={{
-          width: '100%',
-          padding: '10px',
-          backgroundColor: '#007bff',
-          color: '#fff',
-          border: 'none',
-          borderRadius: '4px',
-        }}
-      >
-        Login
-      </button>
-    </div>
+      </InputWrapper>
+      <StyledButton onClick={handleLogin}>Login</StyledButton>
+    </FormContainer>
   );
 };
+
+const FormContainer = styled.div`
+  padding: 20px;
+  max-width: 400px;
+  margin: 0 auto;
+`;
+
+const InputWrapper = styled.div`
+  margin-bottom: 10px;
+`;
+
+const StyledInput = styled.input`
+  width: 100%;
+  padding: 8px;
+`;
+
+const StyledButton = styled.button`
+  width: 100%;
+  padding: 10px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+`;
 
 export default LoginForm;
