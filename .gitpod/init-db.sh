@@ -12,5 +12,10 @@ sudo chmod 755 /var/run/mysqld
 # MySQL 서비스 시작
 sudo service mysql start
 
+# shop_db 데이터베이스와 shop_user 사용자 생성
+sudo mysql -e "CREATE DATABASE IF NOT EXISTS shop_db;"
+sudo mysql -e "CREATE USER IF NOT EXISTS 'shop_user'@'localhost' IDENTIFIED BY 'Str0ngP@ssword!';"
+sudo mysql -e "GRANT ALL PRIVILEGES ON shop_db.* TO 'shop_user'@'localhost'; FLUSH PRIVILEGES;"
+
 # 루트 폴더에 있는 SQL 스크립트 실행
-mysql -u root < /workspace/$(basename `pwd`)/shop_db.sql
+sudo mysql < /workspace/$(basename `pwd`)/shop_db.sql
