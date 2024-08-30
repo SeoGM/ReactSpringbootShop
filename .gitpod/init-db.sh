@@ -4,6 +4,11 @@
 sudo apt-get update
 sudo apt-get install -y mysql-server
 
+# MySQL 디렉토리 권한 설정
+sudo mkdir -p /var/run/mysqld
+sudo chown mysql:mysql /var/run/mysqld
+sudo chmod 755 /var/run/mysqld
+
 # MySQL 서비스 시작
 sudo service mysql start
 
