@@ -1,4 +1,7 @@
 tasks:
+  - name: MySQL Setup
+    init: |
+      bash .gitpod/init-db.sh
   - name: React & TypeScript
     init: |
       cd frontend
@@ -6,7 +9,11 @@ tasks:
     command: |
       cd frontend
       npm start
+
 ports:
   - port: 3000
     onOpen: open-browser
+    visibility: public
+  - port: 3306
+    onOpen: open-preview
     visibility: public
