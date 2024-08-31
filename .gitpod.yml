@@ -1,7 +1,7 @@
 tasks:
   - name: Spring Boot (Gradle)
     init: |
-      bash ./init-spring.sh
+      bash .gitpod/init-spring.sh
   - name: MySQL Setup
     init: |
       bash .gitpod/init-db.sh
