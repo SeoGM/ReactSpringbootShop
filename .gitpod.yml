@@ -18,5 +18,4 @@ ports:
     onOpen: open-browser
     visibility: public
   - port: 3306
-    onOpen: open-preview
     visibility: public
