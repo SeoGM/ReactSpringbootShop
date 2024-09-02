@@ -13,7 +13,10 @@ public class WebConfig {
             @Override
             public void addCorsMappings(CorsRegistry registry) {
                 registry.addMapping("/api/**")
-                        .allowedOrigins("https://reactspringbootshop-frontend.run.goorm.io/")
+                        .allowedOrigins(
+                            "https://reactspringbootshop-frontend.run.goorm.io/",
+                            "https://*.gitpod.io"
+                        )
                         .allowedMethods("GET", "POST", "PUT", "DELETE")
                         .allowedHeaders("*");
             }
