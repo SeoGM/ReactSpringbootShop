@@ -5,10 +5,32 @@ const LoginForm = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
-  const handleLogin = () => {
-    // 로그인 로직 추가 (예: API 호출)
-    console.log('Username:', username);
-    console.log('Password:', password);
+  const handleLogin = async () => {
+    try {
+      const response = await fetch(
+        'https://8080-seogm-reactspringboots-n6p9ze8t2z8.ws-us115.gitpod.io/api/login',
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+          },
+          body: new URLSearchParams({
+            username: username,
+            password: password,
+          }),
+        },
+      );
+
+      if (response.ok) {
+        // 로그인 성공 시 로직 추가 (예: 토큰 저장, 리다이렉트)
+        console.log('Login successful');
+      } else {
+        // 로그인 실패 시 로직 추가 (예: 에러 메시지 표시)
+        console.log('Login failed');
+      }
+    } catch (error) {
+      console.error('Error during login:', error);
+    }
   };
 
   return (

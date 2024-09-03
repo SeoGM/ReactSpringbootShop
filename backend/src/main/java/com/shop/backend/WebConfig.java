@@ -12,13 +12,14 @@ public class WebConfig {
         return new WebMvcConfigurer() {
             @Override
             public void addCorsMappings(CorsRegistry registry) {
-                registry.addMapping("/api/**")
+                registry.addMapping("/**") // 모든 경로에 대해 CORS 허용
                         .allowedOrigins(
                             "https://reactspringbootshop-frontend.run.goorm.io/",
                             "https://*.gitpod.io"
                         )
                         .allowedMethods("GET", "POST", "PUT", "DELETE")
-                        .allowedHeaders("*");
+                        .allowedHeaders("*")
+                        .allowCredentials(true); // 자격 증명을 허용하도록 설정
             }
         };
     }

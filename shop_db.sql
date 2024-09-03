@@ -11,6 +11,10 @@ CREATE TABLE users (
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 );
 
+INSERT INTO users (email, password, name, contact, address, email_verified, role)
+VALUES ('admin@example.com', '$2a$10$VbGJ8eX8VtxE5/IhwsyMte4x5OplrxpCBG4tBRz28jl6KmI67myHC', 'Admin User', '010-1234-5678', '123 Admin St.', TRUE, '10')
+ON DUPLICATE KEY UPDATE email=email;
+
 CREATE TABLE products (
     id BIGINT AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(255) NOT NULL,
