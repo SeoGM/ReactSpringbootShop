@@ -18,4 +18,8 @@ ports:
     onOpen: open-browser
     visibility: public
   - port: 3306
+    onOpen: ignore
+    visibility: public
+  - port: 8080
+    onOpen: ignore
     visibility: public
