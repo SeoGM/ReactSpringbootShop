@@ -10,12 +10,24 @@ const MainPage = () => {
   const [message, setMessage] = useState('');
 
   useEffect(() => {
-    fetch(
-      'https://8080-seogm-reactspringboots-n6p9ze8t2z8.ws-us115.gitpod.io/hello',
-    )
-      .then((response) => response.text())
-      .then((data) => setMessage(data))
-      .catch((error) => console.error('Error fetching message:', error));
+    const fetchMessage = async () => {
+      try {
+        const response = await fetch(
+          'https://8080-seogm-reactspringboots-n6p9ze8t2z8.ws-us115.gitpod.io/hello',
+        );
+
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+
+        const data = await response.text();
+        setMessage(data);
+      } catch (error) {
+        console.error('Error fetching message:', error.message);
+      }
+    };
+
+    fetchMessage();
   }, []);
 
   return (
