@@ -8,7 +8,7 @@ const LoginForm = () => {
   const handleLogin = async () => {
     try {
       const response = await fetch(
-        'https://8080-seogm-reactspringboots-n6p9ze8t2z8.ws-us115.gitpod.io/api/login',
+        'https://8080-seogm-reactspringboots-8grpgdnxcdr.ws-us116.gitpod.io/api/login',
         {
           method: 'POST',
           headers: {

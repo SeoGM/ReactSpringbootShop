@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import ShopLayout from './layout/ShopLayout';
 import AdminLayout from './layout/AdminLayout';
 import MainPage from './features/main/pages/MainPage';
+import TestPage from './features/main/pages/TestPage';
 import LoginPage from './features/user/login/pages/LoginPage';
 import RegisterPage from './features/user/register/pages/RegisterPage';
 
@@ -21,6 +22,7 @@ const AppRoutes = () => {
             </ShopLayout>
           }
         />
+        <Route path="/test" element={<TestPage />} />
         <Route
           path="/login"
           element={
