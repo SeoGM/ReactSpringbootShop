@@ -1,18 +1,19 @@
 tasks:
   - name: Spring Boot (Gradle)
+    init: |
     command: |
       bash .gitpod/init-spring.sh
   - name: MySQL Setup
+    init: |
     command: |
       bash .gitpod/init-db.sh
   - name: React & TypeScript
     init: |
-      cd frontend
+      cd shop/frontend
       npm install --legacy-peer-deps
     command: |
-      cd frontend
+      cd shop/frontend
       npm start
-
 ports:
   - port: 3000
     onOpen: open-browser
