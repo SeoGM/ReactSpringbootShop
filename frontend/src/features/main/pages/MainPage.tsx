@@ -22,8 +22,8 @@ const MainPage = () => {
 
         const data = await response.text();
         setMessage(data);
-      } catch (error) {
-        console.error('Error fetching message:', error.message);
+      } catch (error: unknown) {
+        console.error('Error fetching message:', error);
       }
     };
 

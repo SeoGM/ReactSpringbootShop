@@ -1,9 +1,9 @@
 tasks:
   - name: Spring Boot (Gradle)
-    init: |
+    command: |
       bash .gitpod/init-spring.sh
   - name: MySQL Setup
-    init: |
+    command: |
       bash .gitpod/init-db.sh
   - name: React & TypeScript
     init: |
@@ -17,11 +17,9 @@ ports:
   - port: 3000
     onOpen: open-browser
     visibility: public
-    protocol: https
   - port: 3306
     onOpen: ignore
     visibility: public
   - port: 8080
     onOpen: ignore
     visibility: public
-    protocol: https
