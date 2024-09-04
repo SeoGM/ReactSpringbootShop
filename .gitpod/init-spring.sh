@@ -1,6 +1,6 @@
 #!/bin/bash
 
-cd backend
+cd shop/backend
 
 # Install SDKMAN and set up Java 17
 curl -s "https://get.sdkman.io" | bash
