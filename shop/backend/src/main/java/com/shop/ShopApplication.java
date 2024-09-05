@@ -21,32 +21,3 @@ class MessageController {
         return "Hello from Spring Boot!";
     }
 }
-
-@RestController
-class ProductController {
-    @GetMapping("/api/products")
-    public List<Product> getProducts() {
-        return List.of(
-            new Product(1, "Product 1"),
-            new Product(2, "Product 2")
-        );
-    }
-}
-
-class Product {
-    private int id;
-    private String name;
-
-    public Product(int id, String name) {
-        this.id = id;
-        this.name = name;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public String getName() {
-        return name;
-    }
-}
