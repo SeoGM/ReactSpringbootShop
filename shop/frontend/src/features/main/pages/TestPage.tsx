@@ -1,25 +1,37 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
+import MainBanner from '../components/MainBanner';
+import styled from 'styled-components';
+import { fetchData } from '../../../utils/api';
 
-function TestPage() {
-  const [message, setMessage] = useState<string>('');
+const PageContainer = styled.div`
+  padding: 20px;
+`;
 
-  const backendUrl =
-    process.env.REACT_APP_BACKEND_URL ||
-    'https://8080-seogm-reactspringboots-8grpgdnxcdr.ws-us116.gitpod.io';
+const MainPage = () => {
+  const [message, setMessage] = useState('');
 
   useEffect(() => {
-    fetch(`${backendUrl}/api/message`)
-      .then((response) => response.text())
-      .then((data) => setMessage(data))
-      .catch((error) => console.error('Error:', error));
+    const getMessage = async () => {
+      try {
+        // fetchData 함수를 사용하여 API 호출
+        const data = await fetchData('/api/message');
+        setMessage(data);
+      } catch (error: unknown) {
+        console.error('Error fetching message:', error);
+      }
+    };
+
+    getMessage();
   }, []);
 
   return (
-    <div className="TestPage">
-      <h1>Test Page: React + Spring Boot Example</h1>
-      <p>Message from backend: {message}</p>
+    <div>
+      <MainBanner />
+      <PageContainer>
+        <p>Server Message: {message}</p>
+      </PageContainer>
     </div>
   );
-}
+};
 
-export default TestPage;
+export default MainPage;
