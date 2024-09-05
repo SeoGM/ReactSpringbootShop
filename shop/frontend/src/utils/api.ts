@@ -2,7 +2,7 @@ import axios from 'axios';
 
 // Axios 기본 설정
 const api = axios.create({
-  baseURL: 'https://8080-seogm-reactspringboots-hos3g00mnmd.ws-us116.gitpod.io',
+  baseURL: 'https://8080-seogm-reactspringboots-xzijcys2drv.ws-us116.gitpod.io',
   headers: {
     'Content-Type': 'application/json',
   },
