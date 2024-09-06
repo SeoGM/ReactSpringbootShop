@@ -35,6 +35,10 @@ dependencies {
     // MySQL Connector - MySQL 데이터베이스와의 연결을 위해 필요
     implementation group: 'mysql', name: 'mysql-connector-java', version: '8.0.33'
 
+    // Lombok 추가
+    compileOnly 'org.projectlombok:lombok:1.18.24'
+    annotationProcessor 'org.projectlombok:lombok:1.18.24'
+
     // 테스트 의존성
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
     testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
