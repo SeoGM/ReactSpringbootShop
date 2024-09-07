@@ -2,7 +2,7 @@ import axios from 'axios';
 
 // Axios 기본 설정
 const api = axios.create({
-  baseURL: 'https://8080-seogm-reactspringboots-wty131htfel.ws-us116.gitpod.io',
+  baseURL: 'https://8080-seogm-reactspringboots-x148jeun0tn.ws-us116.gitpod.io',
   headers: {
     'Content-Type': 'application/json',
   },
@@ -32,7 +32,16 @@ export const postData = async (endpoint: string, data: any) => {
     const response = await api.post(endpoint, data);
     return response.data;
   } catch (error) {
-    console.error('API 호출 중 에러 발생:', error);
+    if (axios.isAxiosError(error)) {
+      // AxiosError 객체일 경우 추가 정보 사용 가능
+      console.error('Axios 에러:', error.response?.data || error.message);
+    } else if (error instanceof Error) {
+      // 일반적인 Error 객체
+      console.error('일반 에러:', error.message);
+    } else {
+      // 알 수 없는 에러
+      console.error('알 수 없는 에러:', error);
+    }
     throw error;
   }
 };
