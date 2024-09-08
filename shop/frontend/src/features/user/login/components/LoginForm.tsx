@@ -13,10 +13,14 @@ const LoginForm = () => {
         password: password,
       };
 
-      const response = await postData('/api/login', new URLSearchParams(data));
+      const response = await postData(
+        '/api/auth/login',
+        new URLSearchParams(data),
+      );
 
-      if (response) {
-        console.log('Login successful');
+      if (response.token) {
+        console.log('Login successful, token:', response.token);
+        localStorage.setItem('jwtToken', response.token);
       } else {
         console.log('Login failed');
       }

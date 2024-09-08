@@ -20,21 +20,20 @@ shop/
 │    │    │    ├── java/
 │    │    │    │    └── com/
 │    │    │    │         └── shop/
-│    │    │    │              └── backend/
-│    │    │    │                   ├── product/
-│    │    │    │                   │    ├── controller/
-│    │    │    │                   │    ├── model/
-│    │    │    │                   │    ├── repository/
-│    │    │    │                   │    ├── service/
-│    │    │    │                   │    └── dto/
-│    │    │    │                   ├── user/
-│    │    │    │                   │    ├── controller/
-│    │    │    │                   │    ├── model/
-│    │    │    │                   │    ├── repository/
-│    │    │    │                   │    ├── service/
-│    │    │    │                   │    └── dto/
-│    │    │    │                   ├── config/
-│    │    │    │                   └── BackendApplication.java
+│    │    │    │              ├── product/
+│    │    │    │              │    ├── controller/
+│    │    │    │              │    ├── entity/
+│    │    │    │              │    ├── repository/
+│    │    │    │              │    ├── service/
+│    │    │    │              │    └── dto/
+│    │    │    │              ├── user/
+│    │    │    │              │    ├── controller/
+│    │    │    │              │    ├── entity/
+│    │    │    │              │    ├── repository/
+│    │    │    │              │    ├── service/
+│    │    │    │              │    └── dto/
+│    │    │    │              ├── config/
+│    │    │    │              └── BackendApplication.java
 │    │    └── test/
 │    │         └── java/
 │    │              └── com/
