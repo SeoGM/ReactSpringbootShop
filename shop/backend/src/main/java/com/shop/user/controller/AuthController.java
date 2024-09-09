@@ -9,7 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/auth")
+@RequestMapping("/api/auth")
 public class AuthController {
 
     private final JwtTokenProvider jwtTokenProvider;
@@ -18,7 +18,6 @@ public class AuthController {
     public AuthController(JwtTokenProvider jwtTokenProvider) {
         this.jwtTokenProvider = jwtTokenProvider;
     }
-
 
     // 로그인 시 JWT 토큰 발급
     @PostMapping("/login")
