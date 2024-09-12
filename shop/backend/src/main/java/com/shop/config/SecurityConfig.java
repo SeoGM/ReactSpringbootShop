@@ -1,54 +1,53 @@
 package com.shop.config;
 
-import com.shop.user.service.CustomUserDetailsService;
-import com.shop.user.repository.UserRepository;
-import com.shop.config.JwtAuthenticationFilter;  // JWT 필터 클래스가 존재하는 패키지 경로
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
+import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.web.SecurityFilterChain;
-import org.springframework.security.config.annotation.web.builders.HttpSecurity;  // HttpSecurity import 추가
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.security.provisioning.InMemoryUserDetailsManager;
+import org.springframework.security.web.SecurityFilterChain;
 
 @Configuration
 public class SecurityConfig {
 
     private final JwtTokenProvider jwtTokenProvider;
-    private final UserRepository userRepository;
 
-    public SecurityConfig(JwtTokenProvider jwtTokenProvider, UserRepository userRepository) {
+    public SecurityConfig(JwtTokenProvider jwtTokenProvider) {
         this.jwtTokenProvider = jwtTokenProvider;
-        this.userRepository = userRepository;
     }
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-        return http
-            .csrf(csrf -> csrf.disable())  // CSRF 비활성화
-            .authorizeHttpRequests(auth -> auth
-                .requestMatchers("/", "/api/auth/login", "/api/auth/register", "/error").permitAll()
-                .anyRequest().authenticated()
-            )
-            .addFilterBefore(new JwtAuthenticationFilter(jwtTokenProvider), UsernamePasswordAuthenticationFilter.class)
-            .build();
-    }
+        http
+            .csrf().disable()
+            .authorizeRequests()
+            .requestMatchers("/", "/api/auth/login", "/api/auth/register").permitAll()  // 인증 없이 허용할 경로
+            .anyRequest().authenticated();  // 나머지 경로는 인증 필요
 
-    @Bean
-    public PasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder();
-    }
+        // JWT 인증 필터 추가 (필터 설정)
+        http.addFilterBefore(new JwtAuthenticationFilter(jwtTokenProvider), UsernamePasswordAuthenticationFilter.class);
 
-    @Bean
-    public AuthenticationManager authenticationManager(AuthenticationConfiguration configuration) throws Exception {
-        return configuration.getAuthenticationManager();
+        return http.build();
     }
 
     @Bean
     public UserDetailsService userDetailsService() {
-        return new CustomUserDetailsService(userRepository);
+        UserDetails user = org.springframework.security.core.userdetails.User.withDefaultPasswordEncoder()
+            .username("user")
+            .password("password")
+            .roles("USER")
+            .build();
+        return new InMemoryUserDetailsManager(user);
+    }
+
+
+    @Bean
+    public AuthenticationManager authenticationManager(AuthenticationConfiguration configuration) throws Exception {
+        return configuration.getAuthenticationManager();
     }
 }

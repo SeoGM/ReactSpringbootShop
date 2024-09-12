@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import { fetchData } from '../../../utils/api';
-import axios from 'axios';
 
 export interface User {
   id: number;
@@ -23,10 +22,8 @@ const Dashboard = () => {
   // 사용자 목록을 불러오는 비동기 함수
   const fetchUsers = async () => {
     try {
-      const response = await axios.get(
-        'https://8080-seogm-reactspringboots-wty131htfel.ws-us116.gitpod.io/api/users',
-      );
-      setUsers(response.data); // API 응답 데이터를 상태에 저장
+      const usersData = await fetchData('/users');
+      setUsers(usersData); // API 응답 데이터를 상태에 저장
       setLoading(false); // 로딩 종료
     } catch (err) {
       setError('사용자 목록을 불러오는 중 에러가 발생했습니다.'); // 에러 메시지 설정
