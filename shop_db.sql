@@ -12,7 +12,7 @@ CREATE TABLE users (
 );
 
 INSERT INTO users (email, password, name, contact, address, email_verified, role)
-VALUES ('admin@example.com', '$2a$10$VbGJ8eX8VtxE5/IhwsyMte4x5OplrxpCBG4tBRz28jl6KmI67myHC', 'Admin User', '010-1234-5678', '123 Admin St.', TRUE, '10')
+VALUES ('admin@example.com', '$2b$12$Mf9zXGsjnCn6nzoOM6kcE.nBv1C4bm3hNd/Xyt7GWxF7h5YUgQMF6', 'Admin User', '010-1234-5678', '123 Admin St.', TRUE, '10')
 ON DUPLICATE KEY UPDATE email=email;
 
 CREATE TABLE products (
