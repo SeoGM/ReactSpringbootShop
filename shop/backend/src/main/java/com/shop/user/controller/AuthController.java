@@ -40,11 +40,11 @@ public class AuthController {
         }
 
         // 비밀번호 검증 전 비밀번호 로그 출력
-        logger.info("입력받은 비밀번호 = {}", passwordEncoder.encode(password));
+        logger.info("입력받은 비밀번호 = {}", password);
         logger.info("DB에 저장된 암호화된 비밀번호 = {}", user.getPassword());
 
         // 비밀번호 검증
-        if (!passwordEncoder.matches(passwordEncoder.encode(password), user.getPassword())) {
+        if (!passwordEncoder.matches(password, user.getPassword())) {
             logger.warn("로그인 실패: 비밀번호 불일치 = {}", email);
             return ResponseEntity.status(401).body("Invalid email or password.");
         }
