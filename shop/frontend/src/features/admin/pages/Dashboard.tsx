@@ -1,18 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { fetchData } from '../../../utils/api';
-
-export interface User {
-  id: number;
-  email: string;
-  password: string;
-  name: string;
-  contact: string;
-  address?: string;
-  emailVerified: boolean;
-  role: string;
-  createdAt: string;
-  updatedAt: string;
-}
+import { User } from '../../../types/userTypes';
 
 const Dashboard = () => {
   const [users, setUsers] = useState<User[]>([]);
