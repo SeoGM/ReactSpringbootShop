@@ -1,53 +1,33 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
+import { useQuery } from '@tanstack/react-query';
 import { fetchData } from '../../../utils/api';
+import { User } from '../../../types/userTypes';
 
-export interface User {
-  id: number;
-  email: string;
-  password: string;
-  name: string;
-  contact: string;
-  address?: string;
-  emailVerified: boolean;
-  role: string;
-  createdAt: string;
-  updatedAt: string;
-}
+// fetchUsers 함수의 타입을 명시적으로 정의합니다.
+const fetchUsers = (): Promise<User[]> => fetchData('/users');
 
 const Dashboard = () => {
-  const [users, setUsers] = useState<User[]>([]);
-  const [loading, setLoading] = useState<boolean>(true); // 로딩 상태
-  const [error, setError] = useState<string | null>(null); // 에러 상태
-
-  // 사용자 목록을 불러오는 비동기 함수
-  const fetchUsers = async () => {
-    try {
-      const usersData = await fetchData('/users');
-      setUsers(usersData); // API 응답 데이터를 상태에 저장
-      setLoading(false); // 로딩 종료
-    } catch (err) {
-      setError('사용자 목록을 불러오는 중 에러가 발생했습니다.'); // 에러 메시지 설정
-      setLoading(false); // 로딩 종료
-    }
-  };
-
-  // 컴포넌트가 처음 렌더링될 때 fetchUsers 함수 호출
-  useEffect(() => {
-    fetchUsers();
-  }, []);
+  const {
+    data: users,
+    isLoading,
+    error,
+  } = useQuery({
+    queryKey: ['users'],
+    queryFn: fetchUsers,
+  });
 
   return (
     <div>
       <h1>Admin Dashboard</h1>
-      <p>Welcome to the admin dashboard.</p>
+      <p>관리자 대시보드에 오신 것을 환영합니다.</p>
 
       {/* 사용자 목록을 표시 */}
-      <h2>User List</h2>
-      {loading ? (
-        <p>Loading...</p>
+      <h2>사용자 목록</h2>
+      {isLoading ? (
+        <p>로딩 중...</p>
       ) : error ? (
-        <p>{error}</p>
-      ) : users.length > 0 ? (
+        <p>에러: {(error as Error).message}</p>
+      ) : users && users.length > 0 ? (
         <ul>
           {users.map((user) => (
             <li key={user.id}>
@@ -56,7 +36,7 @@ const Dashboard = () => {
           ))}
         </ul>
       ) : (
-        <p>No users available.</p>
+        <p>사용 가능한 사용자가 없습니다.</p>
       )}
     </div>
   );

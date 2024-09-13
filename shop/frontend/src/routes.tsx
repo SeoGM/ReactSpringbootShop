@@ -104,11 +104,11 @@ const AppRoutes = () => {
         <Route
           path="/admin"
           element={
-            <AdminRoute>
-              <AdminLayout>
-                <Dashboard />
-              </AdminLayout>
-            </AdminRoute>
+            // <AdminRoute>
+            <AdminLayout>
+              <Dashboard />
+            </AdminLayout>
+            // </AdminRoute>
           }
         />
         <Route
