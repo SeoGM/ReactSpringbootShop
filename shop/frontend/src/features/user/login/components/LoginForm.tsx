@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import { useMutation } from '@tanstack/react-query';
 import { postData } from '../../../../utils/api';
+import { useDispatch } from 'react-redux';
+import { login } from '../../../../store/userSlice'; // Redux 액션 가져오기
 
 interface LoginData {
   username: string;
@@ -18,11 +20,14 @@ const loginUser = (data: LoginData): Promise<LoginResponse> =>
 const LoginForm = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const dispatch = useDispatch(); // Redux dispatch 사용
 
   const mutation = useMutation({
     mutationFn: loginUser,
     onSuccess: (data) => {
       console.log('Login successful, token:', data.token);
+      // 로그인 성공 시 Redux 상태에 저장
+      dispatch(login({ token: data.token, username }));
       localStorage.setItem('jwtToken', data.token);
     },
     onError: (error: Error) => {
