@@ -3,7 +3,6 @@ import { useQuery } from '@tanstack/react-query';
 import { fetchData } from '../../../utils/api';
 import { User } from '../../../types/userTypes';
 
-// fetchUsers 함수의 타입을 명시적으로 정의합니다.
 const fetchUsers = (): Promise<User[]> => fetchData('/users');
 
 const Dashboard = () => {

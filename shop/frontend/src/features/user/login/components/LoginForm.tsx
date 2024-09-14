@@ -3,30 +3,35 @@ import styled from 'styled-components';
 import { useMutation } from '@tanstack/react-query';
 import { postData } from '../../../../utils/api';
 
+interface LoginData {
+  username: string;
+  password: string;
+}
+
+interface LoginResponse {
+  token: string;
+}
+
+const loginUser = (data: LoginData): Promise<LoginResponse> =>
+  postData('/api/auth/login', data);
+
 const LoginForm = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
-  
-
-  const handleLogin = async () => {
-    try {
-      const data = {
-        username: username,
-        password: password,
-      };
-
-      const response = await postData('/api/auth/login', data);
-
-      if (response.token) {
-        console.log('Login successful, token:', response.token);
-        localStorage.setItem('jwtToken', response.token);
-      } else {
-        console.log('Login failed');
-      }
-    } catch (error) {
+  const mutation = useMutation({
+    mutationFn: loginUser,
+    onSuccess: (data) => {
+      console.log('Login successful, token:', data.token);
+      localStorage.setItem('jwtToken', data.token);
+    },
+    onError: (error: Error) => {
       console.error('Error during login:', error);
-    }
+    },
+  });
+
+  const handleLogin = () => {
+    mutation.mutate({ username, password });
   };
 
   return (
@@ -48,7 +53,12 @@ const LoginForm = () => {
           onChange={(e) => setPassword(e.target.value)}
         />
       </InputWrapper>
-      <StyledButton onClick={handleLogin}>Login</StyledButton>
+      <StyledButton onClick={handleLogin} disabled={mutation.isPending}>
+        {mutation.isPending ? 'Logging in...' : 'Login'}
+      </StyledButton>
+      {mutation.isError && (
+        <ErrorMessage>{(mutation.error as Error).message}</ErrorMessage>
+      )}
     </FormContainer>
   );
 };
@@ -75,6 +85,17 @@ const StyledButton = styled.button`
   color: #fff;
   border: none;
   border-radius: 4px;
+  cursor: pointer;
+
+  &:disabled {
+    background-color: #cccccc;
+    cursor: not-allowed;
+  }
+`;
+
+const ErrorMessage = styled.p`
+  color: red;
+  margin-top: 10px;
 `;
 
 export default LoginForm;
