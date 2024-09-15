@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
-import SearchBar from '../app/components/SearchBar';
+import SearchBar from '../components/SearchBar';
 
 const Header = () => {
   const [showBanner, setShowBanner] = useState(true);
