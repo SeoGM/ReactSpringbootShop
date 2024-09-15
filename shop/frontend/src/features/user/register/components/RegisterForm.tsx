@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import Input from '../../../../components/Input';
+import Input from '../../../../app/components/Input';
 import useForm from '../../../../utils/useForm';
 
 const RegisterForm = () => {
