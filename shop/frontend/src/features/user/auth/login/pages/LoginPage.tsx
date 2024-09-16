@@ -1,6 +1,6 @@
 import React from 'react';
 import { Navigate } from 'react-router-dom';
-import { useAppSelector } from '../../../../app/store/hooks'; // Redux 상태 조회용 커스텀 훅
+import { useAppSelector } from '../../../../../app/store/hooks'; // Redux 상태 조회용 커스텀 훅
 import LoginForm from '../components/LoginForm';
 
 const LoginPage = () => {

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import MainBanner from '../components/MainBanner';
 import styled from 'styled-components';
-import { fetchData } from '../../../utils/api';
+import { fetchData } from '../../../../utils/api';
 
 const PageContainer = styled.div`
   padding: 20px;
