@@ -2,10 +2,13 @@ import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import ShopLayout from './layout/ShopLayout';
 import ProtectedRoute from './routes/ProtectedRoute';
-import MainPage from '../features/main/pages/MainPage';
-import TestPage from '../features/main/pages/TestPage';
-import LoginPage from '../features/user/login/pages/LoginPage';
-import RegisterPage from '../features/user/register/pages/RegisterPage';
+import MainPage from '../features/shop/main/pages/MainPage';
+import TestPage from '../features/shop/main/pages/TestPage';
+import LoginPage from '../features/user/auth/login/pages/LoginPage';
+import RegisterPage from '../features/user/auth/register/pages/RegisterPage';
+import MyPage from '../features/user/profile/mypage/pages/MyPage';
+import CartPage from '../features/user/profile/cart/pages/CartPage';
+import OrderPage from '../features/user/profile/order/pages/OrderPage';
 
 import AdminLayout from './layout/AdminLayout';
 import AdminRoute from './routes/AdminRoute';
@@ -44,11 +47,21 @@ const AppRoutes = () => {
 
         {/* Protected Routes (로그인한 사용자만 접근 가능) */}
         <Route
+          path="/mypage"
+          element={
+            <ProtectedRoute>
+              <ShopLayout>
+                <MyPage />
+              </ShopLayout>
+            </ProtectedRoute>
+          }
+        />
+        <Route
           path="/cart"
           element={
             <ProtectedRoute>
               <ShopLayout>
-                <div>Cart Page</div>
+                <CartPage />
               </ShopLayout>
             </ProtectedRoute>
           }
@@ -58,7 +71,7 @@ const AppRoutes = () => {
           element={
             <ProtectedRoute>
               <ShopLayout>
-                <div>Order Page</div>
+                <OrderPage />
               </ShopLayout>
             </ProtectedRoute>
           }
