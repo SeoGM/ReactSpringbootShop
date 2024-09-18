@@ -4,14 +4,14 @@ interface UserState {
   token: string | null;
   username: string | null;
   isLoggedIn: boolean;
-  role: string | null; // 사용자 역할 추가
+  role: string | null;
 }
 
 const initialState: UserState = {
   token: null,
   username: null,
   isLoggedIn: false,
-  role: null, // 초기 역할 값
+  role: null,
 };
 
 const userSlice = createSlice({
@@ -20,18 +20,18 @@ const userSlice = createSlice({
   reducers: {
     login: (
       state,
-      action: PayloadAction<{ token: string; username: string; role: string }>, // 역할도 추가
+      action: PayloadAction<{ token: string; username: string; role: string }>,
     ) => {
       state.token = action.payload.token;
       state.username = action.payload.username;
       state.isLoggedIn = true;
-      state.role = action.payload.role; // 역할 저장
+      state.role = action.payload.role;
     },
     logout: (state) => {
       state.token = null;
       state.username = null;
       state.isLoggedIn = false;
-      state.role = null; // 로그아웃 시 역할 초기화
+      state.role = null;
     },
   },
 });
