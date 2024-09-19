@@ -33,8 +33,12 @@ const userSlice = createSlice({
       state.isLoggedIn = false;
       state.role = null;
     },
+    setToken: (state, action: PayloadAction<string>) => {
+      state.token = action.payload;
+      state.isLoggedIn = !!action.payload;
+    },
   },
 });
 
-export const { login, logout } = userSlice.actions;
+export const { login, logout, setToken } = userSlice.actions;
 export default userSlice.reducer;
