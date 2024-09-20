@@ -4,6 +4,7 @@ import { useMutation } from '@tanstack/react-query';
 import { postData } from '../../../../../utils/api';
 import { useDispatch } from 'react-redux';
 import { login } from '../../../../../app/store/userSlice';
+import { jwtDecode } from 'jwt-decode';
 
 interface LoginData {
   username: string;
@@ -12,6 +13,10 @@ interface LoginData {
 
 interface LoginResponse {
   token: string;
+}
+
+interface DecodedToken {
+  sub: string;
   role: string;
 }
 
@@ -26,12 +31,21 @@ const LoginForm = () => {
   const mutation = useMutation({
     mutationFn: loginUser,
     onSuccess: (data) => {
-      console.log('Login successful, token:', data.token);
-      dispatch(login({ token: data.token, username, role: data.role }));
-      localStorage.setItem('jwtToken', data.token);
+      const decoded: DecodedToken = jwtDecode<DecodedToken>(data.token);
+
+      console.log('Decoded JWT:', decoded);
+
+      const email = decoded.sub;
+      const { role } = decoded;
+
+      if (email && role) {
+        dispatch(login({ token: data.token, username: email, role }));
+      } else {
+        console.error('디코딩된 토큰에 email 또는 role이 포함되어 있지 않습니다.');
+      }
     },
     onError: (error: Error) => {
-      console.error('Error during login:', error);
+      console.error('로그인 중 에러 발생:', error);
     },
   });
 

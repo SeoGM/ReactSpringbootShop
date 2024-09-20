@@ -15,7 +15,7 @@ const App = () => {
   useEffect(() => {
     const savedToken = localStorage.getItem('jwtToken');
     if (savedToken) {
-      dispatch(setToken(savedToken));
+      dispatch(setToken({ token: savedToken }));
     }
   }, [dispatch]);
 
