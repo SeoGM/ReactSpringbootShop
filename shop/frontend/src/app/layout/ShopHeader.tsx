@@ -1,11 +1,23 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom'; // useNavigate 사용
 import styled from 'styled-components';
-
+import { useIsLoggedIn } from '../../hooks/useIsLoggedIn';
+import { useDispatch } from 'react-redux';
+import { logout } from '../../store/userSlice'; // userSlice에서 로그아웃 액션 가져오기
 import SearchBar from '../components/SearchBar';
 
 const Header = () => {
+  const isLoggedIn = useIsLoggedIn();
   const [showBanner, setShowBanner] = useState(true);
+  const dispatch = useDispatch();
+  const navigate = useNavigate(); // useNavigate 훅 사용
+
+  const handleLogout = () => {
+    // 로그아웃 처리
+    localStorage.removeItem('token'); // 토큰 삭제
+    dispatch(logout()); // Redux 상태 업데이트 (로그아웃 상태로 변경)
+    navigate('/'); // 로그아웃 후 메인 페이지로 이동
+  };
 
   return (
     <div>
@@ -30,7 +42,11 @@ const Header = () => {
               <Link to="/">Home</Link>
             </NavItem>
             <NavItem>
-              <Link to="/login">Login</Link>
+              {isLoggedIn ? (
+                <button onClick={handleLogout}>Logout</button> // 로그아웃 버튼
+              ) : (
+                <Link to="/login">Login</Link> // 로그인 버튼
+              )}
             </NavItem>
             <NavItem>
               <Link to="/products">Products</Link>

@@ -1,13 +1,13 @@
 import React from 'react';
 import { Navigate } from 'react-router-dom';
-import { useAppSelector } from '../../../../../app/store/hooks';
-import { RootState } from '../../../../../app/store/store';
+import { useAppSelector } from '../../../../../store/hooks';
+import { RootState } from '../../../../../store/store';
 import LoginForm from '../components/LoginForm';
 
 const LoginPage = () => {
-  const token = useAppSelector((state: RootState) => state.user.token);
+  const isLoggedIn = useAppSelector((state: RootState) => state.user.isLoggedIn);
 
-  if (token) {
+  if (isLoggedIn) {
     return <Navigate to="/" replace />;
   }
 
