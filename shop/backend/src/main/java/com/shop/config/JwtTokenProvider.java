@@ -11,11 +11,12 @@ import org.springframework.beans.factory.annotation.Value;
 
 import java.security.Key;
 import java.util.Date;
+import java.util.Map;
 
 @Component
 public class JwtTokenProvider {
 
-   @Value("${jwt.secret}")
+    @Value("${jwt.secret}")
     private String secretKey;
 
     @Value("${jwt.expiration}")
@@ -26,9 +27,10 @@ public class JwtTokenProvider {
         return Keys.hmacShaKeyFor(secretKey.getBytes());
     }
 
-    // JWT 토큰 생성
-    public String createToken(String username) {
+    // JWT 토큰 생성 (role 포함)
+    public String createToken(String username, String role) {
         Claims claims = Jwts.claims().setSubject(username);
+        claims.put("role", role);  // role 클레임 추가
 
         Date now = new Date();
         Date validity = new Date(now.getTime() + validityInMilliseconds);
@@ -70,13 +72,25 @@ public class JwtTokenProvider {
                 .getSubject();
     }
 
+    // 토큰에서 역할(role) 정보 추출
+    public String getRoleFromToken(String token) {
+        return (String) Jwts.parserBuilder()
+                .setSigningKey(getSigningKey())
+                .build()
+                .parseClaimsJws(token)
+                .getBody()
+                .get("role");
+    }
+
     // 토큰을 기반으로 인증 정보 추출
     public UserDetails getAuthentication(String token) {
         String username = getUsernameFromToken(token);
+        String role = getRoleFromToken(token);  // 역할(role) 정보 추출
+
         return org.springframework.security.core.userdetails.User
                 .withUsername(username)
                 .password("")  // 패스워드 없이 인증 처리
-                .authorities("ROLE_USER")  // 기본 역할 설정
+                .authorities(role)  // 역할 정보를 인증 객체에 포함
                 .build();
     }
 }

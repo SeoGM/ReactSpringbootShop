@@ -39,21 +39,20 @@ public class AuthController {
             return ResponseEntity.status(401).body("Invalid email or password.");
         }
 
-        // 비밀번호 검증 전 비밀번호 로그 출력
-        logger.info("입력받은 비밀번호 = {}", password);
-        logger.info("DB에 저장된 암호화된 비밀번호 = {}", user.getPassword());
-
         // 비밀번호 검증
         if (!passwordEncoder.matches(password, user.getPassword())) {
             logger.warn("로그인 실패: 비밀번호 불일치 = {}", email);
             return ResponseEntity.status(401).body("Invalid email or password.");
         }
 
-        // JWT 토큰 생성
-        String token = jwtTokenProvider.createToken(email);
+        // 사용자 역할(Role) 가져오기
+        String role = user.getRole();
+
+        // JWT 토큰 생성 (role 포함)
+        String token = jwtTokenProvider.createToken(email, role);
 
         // 로그 출력 (토큰 생성 성공)
-        logger.info("토큰 생성 성공: 이메일 = {}", email);
+        logger.info("토큰 생성 성공: 이메일 = {}, 역할 = {}", email, role);
 
         // 생성된 토큰 반환
         return ResponseEntity.ok(new AuthResponse(token));
@@ -64,7 +63,8 @@ public class AuthController {
     public ResponseEntity<?> validateToken(@RequestParam String token) {
         if (jwtTokenProvider.validateToken(token)) {
             String email = jwtTokenProvider.getUsernameFromToken(token);
-            return ResponseEntity.ok("Token is valid. Email: " + email);
+            String role = jwtTokenProvider.getRoleFromToken(token); // role 정보 추출
+            return ResponseEntity.ok("Token is valid. Email: " + email + ", Role: " + role);
         } else {
             return ResponseEntity.status(401).body("Invalid token.");
         }
