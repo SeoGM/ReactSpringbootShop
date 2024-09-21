@@ -17,7 +17,7 @@
     "jsx": "react-jsx",
     "baseUrl": "src",
     "paths": {
-      "@store/*": ["app/store/*"],
+      "@store/*": ["store/*"],
       "@layout/*": ["app/layout/*"],
       "@routes/*": ["app/routes/*"],
       "@features/*": ["features/*"]
