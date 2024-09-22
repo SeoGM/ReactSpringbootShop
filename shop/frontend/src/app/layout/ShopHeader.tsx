@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom'; // useNavigate 사용
 import styled from 'styled-components';
-import { useIsLoggedIn } from '../../hooks/useIsLoggedIn';
+import { useIsLoggedIn } from '@hooks/useIsLoggedIn';
 import { useDispatch } from 'react-redux';
-import { logout } from '../../store/userSlice'; // userSlice에서 로그아웃 액션 가져오기
+import { logout } from '@store/userSlice'; // userSlice에서 로그아웃 액션 가져오기
 import SearchBar from '../components/SearchBar';
 
 const Header = () => {

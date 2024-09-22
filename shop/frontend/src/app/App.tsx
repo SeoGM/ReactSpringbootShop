@@ -2,10 +2,10 @@ import React, { useEffect } from 'react';
 import { Provider, useDispatch } from 'react-redux';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
-import AppRoutes from './routes';
-import GlobalStyle from './GlobalStyle';
-import { store } from '../store/store';
-import { setToken } from '../store/userSlice';
+import AppRoutes from '@routes/AppRoutes';
+import GlobalStyle from '@layout/GlobalStyle';
+import { store } from '@store/store';
+import { setToken } from '@store/userSlice';
 
 const queryClient = new QueryClient();
 
