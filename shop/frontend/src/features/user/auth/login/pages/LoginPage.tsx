@@ -1,7 +1,7 @@
 import React from 'react';
 import { Navigate } from 'react-router-dom';
-import { useAppSelector } from '../../../../../store/hooks';
-import { RootState } from '../../../../../store/store';
+import { useAppSelector } from '@store/hooks';
+import { RootState } from '@store/store';
 import LoginForm from '../components/LoginForm';
 
 const LoginPage = () => {

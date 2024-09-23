@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import { useMutation } from '@tanstack/react-query';
-import { postData } from '../../../../../utils/api';
+import { postData } from '@utils/api';
 import { useDispatch } from 'react-redux';
-import { login } from '../../../../../store/userSlice';
+import { login } from '@store/userSlice';
 import { jwtDecode } from 'jwt-decode';
 
 interface LoginData {

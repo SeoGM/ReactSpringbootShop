@@ -18,10 +18,12 @@
     "baseUrl": "src",
     "paths": {
       "@hooks/*": ["hooks/*"],
-      "@store/*": ["store/*"],
-      "@layout/*": ["app/layout/*"],
-      "@routes/*": ["app/routes/*"],
-      "@features/*": ["features/*"]
+	  "@store/*": ["store/*"],
+	  "@layout/*": ["app/layout/*"],
+	  "@routes/*": ["app/routes/*"],
+	  "@features/*": ["features/*"],
+	  "@common/components/*": ["app/components/*"],
+	  "@utils/*": ["utils/*"]
     }
   },
   "include": ["src"]
