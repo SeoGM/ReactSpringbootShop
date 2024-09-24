@@ -4,6 +4,7 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 interface DecodedToken {
   sub: string;
   role: string;
+  exp: number;
 }
 
 const initialState = {
@@ -51,8 +52,26 @@ const userSlice = createSlice({
 
       localStorage.setItem('jwtToken', action.payload.token);
     },
+    checkTokenExpiration: (state) => {
+      if (!state.token) {
+        return;
+      }
+
+      const decoded: DecodedToken = jwtDecode<DecodedToken>(state.token);
+      const currentTime = Date.now() / 1000;
+
+      if (decoded.exp < currentTime) {
+        state.token = null;
+        state.username = null;
+        state.isLoggedIn = false;
+        state.role = null;
+
+        localStorage.removeItem('jwtToken');
+        console.log('토큰이 만료되었습니다. 로그아웃 처리되었습니다.');
+      }
+    },
   },
 });
 
-export const { login, logout, setToken } = userSlice.actions;
+export const { login, logout, setToken, checkTokenExpiration } = userSlice.actions;
 export default userSlice.reducer;

@@ -5,7 +5,7 @@ import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import AppRoutes from '@routes/AppRoutes';
 import GlobalStyle from '@layout/GlobalStyle';
 import { store } from '@store/store';
-import { setToken } from '@store/userSlice';
+import { setToken, checkTokenExpiration } from '@store/userSlice';
 
 const queryClient = new QueryClient();
 
@@ -16,6 +16,7 @@ const App = () => {
     const savedToken = localStorage.getItem('jwtToken');
     if (savedToken) {
       dispatch(setToken({ token: savedToken }));
+      dispatch(checkTokenExpiration());
     }
   }, [dispatch]);
 
