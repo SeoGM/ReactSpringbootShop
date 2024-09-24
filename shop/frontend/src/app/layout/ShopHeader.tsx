@@ -10,13 +10,12 @@ const Header = () => {
   const isLoggedIn = useIsLoggedIn();
   const [showBanner, setShowBanner] = useState(true);
   const dispatch = useDispatch();
-  const navigate = useNavigate(); // useNavigate 훅 사용
+  const navigate = useNavigate();
 
   const handleLogout = () => {
-    // 로그아웃 처리
-    localStorage.removeItem('token'); // 토큰 삭제
-    dispatch(logout()); // Redux 상태 업데이트 (로그아웃 상태로 변경)
-    navigate('/'); // 로그아웃 후 메인 페이지로 이동
+    localStorage.removeItem('token');
+    dispatch(logout());
+    navigate('/');
   };
 
   return (
@@ -26,9 +25,7 @@ const Header = () => {
           <p>
             Special Sale! Get 50% off on all products!
             <BannerLink to="/sale">Shop Now</BannerLink>
-            <BannerCloseButton onClick={() => setShowBanner(false)}>
-              X
-            </BannerCloseButton>
+            <BannerCloseButton onClick={() => setShowBanner(false)}>X</BannerCloseButton>
           </p>
         </Banner>
       )}
@@ -39,17 +36,24 @@ const Header = () => {
         <Nav>
           <NavList>
             <NavItem>
-              <Link to="/">Home</Link>
+              <NavLink to="/">Home</NavLink>
             </NavItem>
+            {isLoggedIn ? (
+              <NavItem>
+                <StyledButton onClick={handleLogout}>Logout</StyledButton>
+              </NavItem>
+            ) : (
+              <>
+                <NavItem>
+                  <NavLink to="/login">Login</NavLink>
+                </NavItem>
+                <NavItem>
+                  <NavLink to="/register">Register</NavLink>
+                </NavItem>
+              </>
+            )}
             <NavItem>
-              {isLoggedIn ? (
-                <button onClick={handleLogout}>Logout</button> // 로그아웃 버튼
-              ) : (
-                <Link to="/login">Login</Link> // 로그인 버튼
-              )}
-            </NavItem>
-            <NavItem>
-              <Link to="/products">Products</Link>
+              <NavLink to="/products">Products</NavLink>
             </NavItem>
           </NavList>
         </Nav>
@@ -58,7 +62,6 @@ const Header = () => {
   );
 };
 
-// styled-components로 스타일 정의
 const Banner = styled.div`
   background-color: #ffcc00;
   color: #333;
@@ -110,6 +113,39 @@ const NavList = styled.ul`
 
 const NavItem = styled.li`
   margin-left: 20px;
+`;
+
+const NavLink = styled(Link)`
+  font-size: 1rem;
+  color: #fff;
+  text-decoration: none;
+  padding: 5px 10px;
+  border: 1px solid transparent;
+  border-radius: 5px;
+  transition: background-color 0.3s, border-color 0.3s;
+  cursor: pointer;
+  background: none;
+
+  &:hover {
+    background-color: #555;
+    border-color: #fff;
+  }
+`;
+
+const StyledButton = styled.button`
+  font-size: 1rem;
+  color: #fff;
+  background: none;
+  border: 1px solid transparent;
+  border-radius: 5px;
+  padding: 5px 10px;
+  cursor: pointer;
+  transition: background-color 0.3s, border-color 0.3s;
+
+  &:hover {
+    background-color: #555;
+    border-color: #fff;
+  }
 `;
 
 export default Header;

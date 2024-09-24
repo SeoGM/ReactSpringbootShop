@@ -37,11 +37,10 @@ const userSlice = createSlice({
 
       localStorage.removeItem('jwtToken');
     },
-    setToken: (
-      state,
-      action: PayloadAction<{ token: string }>,
-    ) => {
-      const decoded: DecodedToken = jwtDecode<DecodedToken>(action.payload.token);
+    setToken: (state, action: PayloadAction<{ token: string }>) => {
+      const decoded: DecodedToken = jwtDecode<DecodedToken>(
+        action.payload.token,
+      );
 
       console.log('Decoded token in setToken:', decoded);
 
@@ -73,5 +72,6 @@ const userSlice = createSlice({
   },
 });
 
-export const { login, logout, setToken, checkTokenExpiration } = userSlice.actions;
+export const { login, logout, setToken, checkTokenExpiration } =
+  userSlice.actions;
 export default userSlice.reducer;

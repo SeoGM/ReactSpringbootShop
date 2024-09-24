@@ -41,7 +41,9 @@ const LoginForm = () => {
       if (email && role) {
         dispatch(login({ token: data.token, username: email, role }));
       } else {
-        console.error('디코딩된 토큰에 email 또는 role이 포함되어 있지 않습니다.');
+        console.error(
+          '디코딩된 토큰에 email 또는 role이 포함되어 있지 않습니다.',
+        );
       }
     },
     onError: (error: Error) => {

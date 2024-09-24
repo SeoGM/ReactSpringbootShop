@@ -5,7 +5,9 @@ import { RootState } from '@store/store';
 import LoginForm from '../components/LoginForm';
 
 const LoginPage = () => {
-  const isLoggedIn = useAppSelector((state: RootState) => state.user.isLoggedIn);
+  const isLoggedIn = useAppSelector(
+    (state: RootState) => state.user.isLoggedIn,
+  );
 
   if (isLoggedIn) {
     return <Navigate to="/" replace />;
