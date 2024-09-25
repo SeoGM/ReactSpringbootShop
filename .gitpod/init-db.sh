@@ -19,3 +19,4 @@ sudo mysql -e "GRANT ALL PRIVILEGES ON shop_db.* TO 'shop_user'@'localhost'; FLU
 
 # 루트 폴더에 있는 SQL 스크립트 실행
 sudo mysql -e "USE shop_db; source /workspace/$(basename `pwd`)/shop_db.sql;"
+sudo mysql -e "USE shop_db; source /workspace/$(basename `pwd`)/shop_product.sql;"
