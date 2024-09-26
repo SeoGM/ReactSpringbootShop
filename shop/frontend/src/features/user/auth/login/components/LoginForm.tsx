@@ -1,13 +1,15 @@
-import React, { useState } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import { useMutation } from '@tanstack/react-query';
-import { postData } from '@utils/api';
 import { useDispatch } from 'react-redux';
 import { login } from '@store/userSlice';
 import { jwtDecode } from 'jwt-decode';
+import { postData } from '@utils/api';
+import useForm from '@utils/useForm';
+import Input from '@common/components/Input';
 
 interface LoginData {
-  username: string;
+  email: string;
   password: string;
 }
 
@@ -24,8 +26,11 @@ const loginUser = (data: LoginData): Promise<LoginResponse> =>
   postData('/api/auth/login', data);
 
 const LoginForm = () => {
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
+  const { values, handleChange } = useForm({
+    email: '',
+    password: '',
+  });
+
   const dispatch = useDispatch();
 
   const mutation = useMutation({
@@ -39,7 +44,7 @@ const LoginForm = () => {
       const { role } = decoded;
 
       if (email && role) {
-        dispatch(login({ token: data.token, username: email, role }));
+        dispatch(login({ token: data.token, email: email, role }));
       } else {
         console.error(
           '디코딩된 토큰에 email 또는 role이 포함되어 있지 않습니다.',
@@ -52,28 +57,27 @@ const LoginForm = () => {
   });
 
   const handleLogin = () => {
-    mutation.mutate({ username, password });
+    mutation.mutate({ email: values.email, password: values.password });
   };
 
   return (
     <FormContainer>
-      <h2>Login</h2>
-      <InputWrapper>
-        <StyledInput
-          type="text"
-          placeholder="Username"
-          value={username}
-          onChange={(e) => setUsername(e.target.value)}
-        />
-      </InputWrapper>
-      <InputWrapper>
-        <StyledInput
-          type="password"
-          placeholder="Password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-        />
-      </InputWrapper>
+      <Input
+        type="text"
+        label="email"
+        name="email"
+        value={values.email}
+        onChange={handleChange}
+        placeholder="email"
+      />
+      <Input
+        type="password"
+        label="password"
+        name="password"
+        value={values.password}
+        onChange={handleChange}
+        placeholder="password"
+      />
       <StyledButton onClick={handleLogin} disabled={mutation.isPending}>
         {mutation.isPending ? 'Logging in...' : 'Login'}
       </StyledButton>
@@ -85,18 +89,12 @@ const LoginForm = () => {
 };
 
 const FormContainer = styled.div`
-  padding: 20px;
   max-width: 400px;
+  padding: 20px;
   margin: 0 auto;
-`;
-
-const InputWrapper = styled.div`
-  margin-bottom: 10px;
-`;
-
-const StyledInput = styled.input`
-  width: 100%;
-  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  background-color: #f9f9f9;
 `;
 
 const StyledButton = styled.button`

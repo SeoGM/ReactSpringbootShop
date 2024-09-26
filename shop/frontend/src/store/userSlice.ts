@@ -9,7 +9,7 @@ interface DecodedToken {
 
 const initialState = {
   token: null as string | null,
-  username: null as string | null,
+  email: null as string | null,
   isLoggedIn: false,
   role: null as string | null,
 };
@@ -20,10 +20,10 @@ const userSlice = createSlice({
   reducers: {
     login: (
       state,
-      action: PayloadAction<{ token: string; username: string; role: string }>,
+      action: PayloadAction<{ token: string; email: string; role: string }>,
     ) => {
       state.token = action.payload.token;
-      state.username = action.payload.username;
+      state.email = action.payload.email;
       state.isLoggedIn = true;
       state.role = action.payload.role;
 
@@ -31,7 +31,7 @@ const userSlice = createSlice({
     },
     logout: (state) => {
       state.token = null;
-      state.username = null;
+      state.email = null;
       state.isLoggedIn = false;
       state.role = null;
 
@@ -45,7 +45,7 @@ const userSlice = createSlice({
       console.log('Decoded token in setToken:', decoded);
 
       state.token = action.payload.token;
-      state.username = decoded.sub;
+      state.email = decoded.sub;
       state.role = decoded.role;
       state.isLoggedIn = !!action.payload.token;
 
@@ -61,7 +61,7 @@ const userSlice = createSlice({
 
       if (decoded.exp < currentTime) {
         state.token = null;
-        state.username = null;
+        state.email = null;
         state.isLoggedIn = false;
         state.role = null;
 
