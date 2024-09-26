@@ -1,4 +1,5 @@
 import React from 'react';
+import styled from 'styled-components';
 import { Navigate } from 'react-router-dom';
 import { useAppSelector } from '@store/hooks';
 import { RootState } from '@store/store';
@@ -14,11 +15,21 @@ const LoginPage = () => {
   }
 
   return (
-    <div>
-      <h1>Login Page</h1>
+    <PageContainer>
+      <Title>Login Page</Title>
       <LoginForm />
-    </div>
+    </PageContainer>
   );
 };
+
+const PageContainer = styled.div`
+  padding: 20px;
+  text-align: center;
+`;
+
+const Title = styled.h1`
+  font-size: 2rem;
+  margin-bottom: 20px;
+`;
 
 export default LoginPage;
