@@ -13,6 +13,7 @@ const useForm = <T extends Record<string, string>>(initialValues: T) => {
 
   return {
     values,
+    setValues,
     handleChange,
   };
 };

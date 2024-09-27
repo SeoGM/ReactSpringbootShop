@@ -64,7 +64,7 @@ const LoginForm = () => {
     <FormContainer>
       <Input
         type="text"
-        label="email"
+        label="Email"
         name="email"
         value={values.email}
         onChange={handleChange}

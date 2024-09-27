@@ -3,15 +3,16 @@ CREATE TABLE users (
     email VARCHAR(255) NOT NULL UNIQUE,
     password VARCHAR(255) NOT NULL,
     name VARCHAR(255) NOT NULL,
-    contact VARCHAR(255) NOT NULL,
-    address VARCHAR(255),
+    phone_number VARCHAR(20) NOT NULL,
+    address VARCHAR(255) NOT NULL,
+    detail_address VARCHAR(255),
     email_verified BOOLEAN DEFAULT FALSE,
     role VARCHAR(255),
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 );
 
-INSERT INTO users (email, password, name, contact, address, email_verified, role)
+INSERT INTO users (email, password, name, phone_number, address, email_verified, role)
 VALUES ('admin@example.com', '$2b$12$Mf9zXGsjnCn6nzoOM6kcE.nBv1C4bm3hNd/Xyt7GWxF7h5YUgQMF6', 'Admin User', '010-1234-5678', '123 Admin St.', TRUE, '10')
 ON DUPLICATE KEY UPDATE email=email;
 
