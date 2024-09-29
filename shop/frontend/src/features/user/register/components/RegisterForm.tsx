@@ -4,8 +4,7 @@ import { useMutation } from '@tanstack/react-query';
 import { postData } from '@utils/api';
 import useForm from '@utils/useForm';
 import Input from '@common/components/Input';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faSearch } from '@fortawesome/free-solid-svg-icons';
+import { MagnifyingGlassIcon } from '@heroicons/react/24/outline'; // Heroicons 사용
 
 interface RegisterData {
   email: string;
@@ -101,8 +100,10 @@ const RegisterForm = () => {
         onChange={handleChange}
         placeholder="Enter your address"
         readOnly
-        buttonLabel={<FontAwesomeIcon icon={faSearch} />}
-        onButtonClick={openAddressSearch}
+        buttonLabel={
+          <MagnifyingGlassIcon style={{ width: '20px', height: '20px' }} />
+        }
+        onButtonClick={openAddressSearch} // 이벤트 객체 없이 클릭 핸들러 호출
       />
 
       {showDetailAddress && (
@@ -130,7 +131,7 @@ const RegisterForm = () => {
 
 // Styled-components for the form
 const FormContainer = styled.form`
-  max-width: 400px;
+  max-width: 450px;
   margin: 0 auto;
   padding: 20px;
   background-color: #f8f8f8;

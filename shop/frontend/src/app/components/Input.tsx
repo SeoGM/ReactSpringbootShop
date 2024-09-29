@@ -11,7 +11,7 @@ interface InputProps {
   readOnly?: boolean;
   disabled?: boolean;
   buttonLabel?: ReactNode;
-  onButtonClick?: () => void;
+  onButtonClick?: () => void; // 인자를 받지 않는 함수
 }
 
 const Input: React.FC<InputProps> = ({
@@ -40,7 +40,13 @@ const Input: React.FC<InputProps> = ({
           disabled={disabled}
         />
         {buttonLabel && onButtonClick && (
-          <StyledButton onClick={onButtonClick} disabled={disabled}>
+          <StyledButton
+            onClick={(e) => {
+              e.preventDefault();
+              onButtonClick();
+            }}
+            disabled={disabled}
+          >
             {buttonLabel}
           </StyledButton>
         )}
@@ -83,7 +89,8 @@ const StyledInput = styled.input`
 `;
 
 const StyledButton = styled.button`
-  padding: 10px 15px;
+  width: 40px;
+  height: 40px;
   background-color: #007bff;
   color: white;
   border: none;
