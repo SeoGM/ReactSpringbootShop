@@ -26,9 +26,11 @@ public class User {
     private String name;
 
     @Column(nullable = false)
-    private String contact;
+    private String phone_number;
 
     private String address;
+	
+	private String detail_address;
 
     @Column(name = "email_verified", columnDefinition = "BOOLEAN DEFAULT FALSE")
     private Boolean emailVerified = false;

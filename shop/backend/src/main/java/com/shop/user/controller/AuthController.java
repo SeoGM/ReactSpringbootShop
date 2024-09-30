@@ -26,7 +26,7 @@ public class AuthController {
     // 로그인 시 JWT 토큰 발급
     @PostMapping("/login")
     public ResponseEntity<?> login(@RequestBody AuthRequest authRequest) {
-        String email = authRequest.getUsername();
+        String email = authRequest.getEmail();
         String password = authRequest.getPassword();
 
         // 로그 출력 (로그인 시도)
