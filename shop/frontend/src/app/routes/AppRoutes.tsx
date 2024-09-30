@@ -4,11 +4,11 @@ import ShopLayout from '@layout/ShopLayout';
 import ProtectedRoute from '@routes/ProtectedRoute';
 import MainPage from '@features/shop/main/pages/MainPage';
 import TestPage from '@features/shop/main/pages/TestPage';
-import LoginPage from '@features/user/auth/login/pages/LoginPage';
-import RegisterPage from '@features/user/auth/register/pages/RegisterPage';
-import MyPage from '@features/user/profile/mypage/pages/MyPage';
-import CartPage from '@features/user/profile/cart/pages/CartPage';
-import OrderPage from '@features/user/profile/order/pages/OrderPage';
+import LoginPage from '@features/user/login/pages/LoginPage';
+import RegisterPage from '@features/user/register/pages/RegisterPage';
+import MyPage from '@features/user/mypage/pages/MyPage';
+import CartPage from '@features/user/cart/pages/CartPage';
+import OrderPage from '@features/user/order/pages/OrderPage';
 
 import AdminLayout from '@layout/AdminLayout';
 import AdminRoute from '@routes/AdminRoute';
