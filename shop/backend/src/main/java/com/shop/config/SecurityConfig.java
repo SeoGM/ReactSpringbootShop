@@ -28,10 +28,9 @@ public class SecurityConfig {
         http
             .csrf().disable()
             .authorizeRequests()
-            .requestMatchers("/", "/api/auth/login", "/api/auth/register", "/users").permitAll()  // 인증 없이 허용할 경로
-            .anyRequest().authenticated();  // 나머지 경로는 인증 필요
+            .requestMatchers("/", "/api/auth/login").permitAll()
+            .anyRequest().authenticated();
 
-        // JWT 인증 필터 추가 (필터 설정)
         http.addFilterBefore(new JwtAuthenticationFilter(jwtTokenProvider), UsernamePasswordAuthenticationFilter.class);
 
         return http.build();

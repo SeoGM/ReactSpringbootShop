@@ -1,10 +1,10 @@
-package com.shop.user.controller;
+package com.shop.auth.controller;
 
 import com.shop.config.JwtTokenProvider;
-import com.shop.user.dto.AuthRequest;
-import com.shop.user.dto.AuthResponse;
-import com.shop.user.entity.User;
-import com.shop.user.service.UserService;
+import com.shop.auth.dto.AuthRequest;
+import com.shop.auth.dto.AuthResponse;
+import com.shop.common.entity.User;
+import com.shop.auth.service.AuthService;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -20,7 +20,7 @@ public class AuthController {
     private static final Logger logger = LoggerFactory.getLogger(AuthController.class);
 
     private final JwtTokenProvider jwtTokenProvider;
-    private final UserService userService;
+    private final AuthService authService;
     private final PasswordEncoder passwordEncoder;
 
     // 로그인 시 JWT 토큰 발급
@@ -33,7 +33,7 @@ public class AuthController {
         logger.info("로그인 시도: 이메일 = {}", email);
 
         // DB에서 사용자 조회 (이메일 기반)
-        User user = userService.findByEmail(email);
+        User user = authService.findByEmail(email);
         if (user == null) {
             logger.warn("로그인 실패: 이메일을 찾을 수 없음 = {}", email);
             return ResponseEntity.status(401).body("Invalid email or password.");
