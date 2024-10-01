@@ -1,4 +1,4 @@
-package com.shop.user.controller;
+package com.shop.auth.controller;
 
 import com.shop.config.JwtTokenProvider;
 import com.shop.user.dto.AuthRequest;
