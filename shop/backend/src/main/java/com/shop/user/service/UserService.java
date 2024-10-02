@@ -1,6 +1,7 @@
 package com.shop.user.service;
 
-import com.shop.user.entity.User;
+import com.shop.common.user.UserEntity;
+
 import com.shop.user.repository.UserRepository;
 import org.springframework.stereotype.Service;
 
@@ -16,12 +17,8 @@ public class UserService {
         this.userRepository = userRepository;
     }
 
-    public List<User> getAllUsers() {
-        return userRepository.findAll();
-    }
-
-    public User findByEmail(String email) {
-        Optional<User> user = userRepository.findByEmail(email);
+    public UserEntity findByEmail(String email) {
+        Optional<UserEntity> user = userRepository.findByEmail(email);
         return user.orElse(null);
     }
 }

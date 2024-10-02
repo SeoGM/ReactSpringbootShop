@@ -1,6 +1,6 @@
 package com.shop.user.controller;
 
-import com.shop.user.entity.User;
+import com.shop.common.user.UserEntity;
 import com.shop.user.service.UserService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -16,8 +16,8 @@ public class UserController {
         this.userService = userService;
     }
 
-    @GetMapping("/users")
-    public List<User> getAllUsers() {
-        return userService.getAllUsers();
-    }
+//     @GetMapping("/users")
+//     public List<User> getAllUsers() {
+//         return userService.getAllUsers();
+//     }
 }
