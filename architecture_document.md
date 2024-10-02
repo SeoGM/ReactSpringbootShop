@@ -3,7 +3,7 @@
 
 ## 1.1 프론트엔드(Frontend)
 - **역할**: 사용자와의 상호작용을 담당합니다. 사용자가 웹사이트에서 보는 모든 UI 요소와, 백엔드와의 통신을 담당합니다.
-- **기술 스택**: React (또는 원하는 프레임워크), TypeScript, HTML/CSS, Axios/Fetch (API 통신용), 상태 관리 라이브러리 (Redux, Context API 등)
+- **기술 스택**: React, TypeScript, HTML/CSS, Axios/Fetch (API 통신용), 상태 관리 라이브러리 (Redux, Context API 등)
 
 ## 1.2 백엔드(Backend - Spring Boot)
 - **역할**: 비즈니스 로직, 데이터베이스와의 상호작용, 인증, API 제공 등을 담당합니다.
@@ -17,31 +17,30 @@ shop/
 ├── backend/
 │    ├── src/
 │    │    ├── main/
-│    │    │    ├── java/
-│    │    │    │    └── com/
-│    │    │    │         └── shop/
-│    │    │    │              ├── product/
-│    │    │    │              │    ├── controller/
-│    │    │    │              │    ├── entity/
-│    │    │    │              │    ├── repository/
-│    │    │    │              │    ├── service/
-│    │    │    │              │    └── dto/
-│    │    │    │              ├── user/
-│    │    │    │              │    ├── controller/
-│    │    │    │              │    ├── entity/
-│    │    │    │              │    ├── repository/
-│    │    │    │              │    ├── service/
-│    │    │    │              │    └── dto/
-│    │    │    │              ├── config/
-│    │    │    │              └── BackendApplication.java
-│    │    └── test/
-│    │         └── java/
-│    │              └── com/
-│    │                   └── shop/
-│    │                        └── backend/
-│    │                             ├── product/
-│    │                             └── user/
-│    ├── pom.xml
+│    │    │    └── java/
+│    │    │         └── com/
+│    │    │              └── shop/
+│    │    │                   ├── common/            
+│    │    │                   │    ├── entity/       
+│    │    │                   │    ├── repository/   
+│    │    │                   ├── user/              
+│    │    │                   │    ├── controller/  
+│    │    │                   │    ├── service/     
+│    │    │                   ├── product/          
+│    │    │                   │    ├── controller/   
+│    │    │                   │    ├── service/     
+│    │    │                   ├── cart/             
+│    │    │                   │    ├── controller/  
+│    │    │                   │    ├── service/      
+│    │    │                   ├── admin/             
+│    │    │                   │    ├── controller/   
+│    │    │                   │    ├── service/     
+│    │    │                   ├── auth/              
+│    │    │                   │    ├── controller/  
+│    │    │                   │    ├── service/     
+│    │    │                   └── config/           
+│    └── resources/
+│         └── application.properties
 ├── frontend/
 │    ├── src/
 │    │    ├── features/
@@ -88,27 +87,32 @@ shop/
 ```
 
 
-# 3. 백엔드 구조 설명 (com.shop.backend)
+# 3. 백엔드 구조 설명 (com.shop)
 
-## 3.1 product 패키지
-- **controller/**: Product 관련 RESTful API 엔드포인트를 정의합니다. 예를 들어, 상품 조회, 등록, 수정, 삭제 등의 기능을 처리합니다.
-- **model/**: Product 엔터티를 정의합니다. 데이터베이스 테이블과 매핑되는 JPA 엔터티를 이곳에 포함시킵니다.
-- **repository/**: Product 엔터티와 데이터베이스 간의 CRUD 작업을 처리하는 인터페이스입니다.
-- **service/**: Product 관련 비즈니스 로직을 처리합니다. 컨트롤러에서 받은 요청을 바탕으로 데이터를 가공하거나 비즈니스 규칙을 적용합니다.
-- **dto/**: Product와 관련된 데이터 전송 객체를 정의합니다. API 요청 및 응답 시 사용됩니다.
+## 3.1 **common**
+- **entity** 및 **repository**와 같은 공통 요소를 포함합니다.  
+- `User`, `Product`, `Cart`와 같은 엔티티와 해당 레포지토리들이 이곳에 위치합니다.
 
-## 3.2 user 패키지
-- **controller/**: User 관련 API 엔드포인트를 정의합니다. 회원 가입, 로그인, 사용자 정보 조회 등을 처리합니다.
-- **model/**: User 엔터티를 정의합니다. 사용자 정보를 저장하는 데이터베이스 테이블과 매핑됩니다.
-- **repository/**: User 엔터티와 데이터베이스 간의 CRUD 작업을 처리합니다.
-- **service/**: User 관련 비즈니스 로직을 처리합니다.
-- **dto/**: User 관련 데이터 전송 객체를 정의합니다.
+## 3.2 **user**
+- 사용자 관련 기능을 포함합니다.  
+- 예를 들어, **회원가입**, **프로필 관리** 등의 기능이 이곳에 포함됩니다.
 
-## 3.3 config 패키지
+## 3.3 **product**
+- 상품 관련 기능을 포함합니다.  
+- 예를 들어, **상품 조회**, **상품 상세 정보 제공** 등의 기능이 이곳에 포함됩니다.
+
+## 3.4 **cart**
+- 장바구니 관련 기능을 포함합니다.  
+- 예를 들어, **장바구니에 상품 추가**, **장바구니 조회**, **장바구니에서 상품 삭제** 등의 기능이 이곳에 포함됩니다.
+
+## 3.5 **admin**
+- 관리자가 상품을 **등록**, **수정**, **삭제**할 수 있는 관리자 관련 기능을 포함합니다.
+
+## 3.6 **auth**
+- **로그인**, **로그아웃** 및 **인증 처리**와 관련된 기능을 포함합니다.
+
+## 3.7 config 패키지
 - **config/**: 공통 설정 파일을 포함합니다. 예를 들어, Spring Security 설정, CORS 설정, 데이터베이스 설정 등이 있습니다.
-
-## 3.4 BackendApplication.java
-- **BackendApplication.java**: Spring Boot 애플리케이션의 진입점으로, 전체 애플리케이션을 시작하는 메인 클래스입니다.
 
 
 
